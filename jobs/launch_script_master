@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH --job-name=runScripts_master
+#SBATCH --output=/fred/oz002/vdimarco/jumps/jumps_or_no_jumps/jobs
+#SBATCH --ntasks=1
+#SBATCH --time=00:10:00
+#SBATCH --tmp=4g
+#SBATCH --mem-per-cpu=8g
+#SBATCH --array=0-99
+
+source ~/.setup_ptasim
+
+chmod +x /fred/oz002/vdimarco/jumps/jumps_or_no_jumps/sims/sims2/scripts/process_real_*
+
+csh /jumps/jumps_or_no_jumps/sims/sims2/scripts/process_real_$SLURM_ARRAY_TASK_ID 

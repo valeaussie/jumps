@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --job-name=OS
+#SBATCH --output=/fred/oz002/vdimarco/jumps/jumps_or_no_jumps/jobs
+#SBATCH --ntasks=1
+#SBATCH --time=00:20:00
+#SBATCH --tmp=4g
+#SBATCH --mem-per-cpu=8g
+#SBATCH --array=0-99
+
+ml conda
+conda activate ent15y
+module load tempo2/075958
+
+
+python /fred/oz002/vdimarco/jumps/jumps_or_no_jumps/sims/sim2/output/real_$SLURM_ARRAY_TASK_ID/calculate_OS_parallel_all_small.py
